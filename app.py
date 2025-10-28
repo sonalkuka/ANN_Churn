@@ -4,6 +4,8 @@ import tensorflow as tf
 from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
 import pandas as pd
 import pickle
+import warnings
+warnings.filterwarnings('ignore')
 
 model=tf.keras.models.load_model('model.h5')
 
@@ -42,8 +44,8 @@ input_data=pd.DataFrame({
 
 )
 
-geo_df=ohe.transform(df[[Geography]])
-df_geo=pd.DataFrame(geo_df.toarray(),columns=ohe.get_feature_names_out([Geography]))
+geo_df=ohe.transform([[Geography]])
+df_geo=pd.DataFrame(geo_df.toarray(),columns=ohe.get_feature_names_out(['Geography']))
 input_data=pd.concat([input_data.reset_index(drop=True),df_geo],axis=1)
 
 
